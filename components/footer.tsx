@@ -40,15 +40,15 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Featured Articles</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <Link href="/blog/jpg-to-webp-converter-guide" className="flex items-center space-x-2 underline">
-                <Zap className="h-4 w-4 text-green-500" />
+                <Zap className="h-4 w-4 text-green-600" />
                 <span>Why You Need a JPG to WebP Converter</span>
               </Link>
               <Link href="/blog/png-to-webp-complete-guide" className="flex items-center space-x-2 underline">
-                <Zap className="h-4 w-4 text-green-500" />
+                <Zap className="h-4 w-4 text-green-600" />
                 <span>PNG to WebP Conversion: Complete Guide for Designers</span>
               </Link>
               <Link href="/blog/heic-to-jpg-iphone-photos" className="flex items-center space-x-2 underline">
-                <Zap className="h-4 w-4 text-green-500" />
+                <Zap className="h-4 w-4 text-green-600" />
                 <span>HEIC to JPG: Fix iPhone Photo Compatibility</span>
               </Link>
             </ul>
