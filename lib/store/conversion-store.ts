@@ -50,7 +50,7 @@ interface ConversionStore {
 export const useConversionStore = create<ConversionStore>()((set, _get) => ({
     files: [],
     options: {
-      quality: 80,
+      quality: 90,
       stripMetadata: true,
       pageSize: 'A4',
       dpi: 150,

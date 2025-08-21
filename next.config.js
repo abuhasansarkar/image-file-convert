@@ -65,6 +65,13 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ['canvas'],
+  },
+  trailingSlash: false,
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
+  },
   webpack: (config, { isServer }) => {
     // Handle WASM files
     config.experiments = {

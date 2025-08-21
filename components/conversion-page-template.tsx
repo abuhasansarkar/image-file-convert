@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Play, RotateCcw } from 'lucide-react';
 import { Dropzone } from './dropzone';
@@ -39,6 +39,21 @@ export function ConversionPageTemplate({
   const hasFiles = files.length > 0;
   const canConvert = files.some(f => f.status === 'queued') && !isProcessing;
 
+  const handleConvert = useCallback(async () => {
+    if (!canConvert) return;
+
+    try {
+      setProcessing(true);
+      await onConvert();
+      toast.success('Conversion completed!', 'All files have been processed successfully.');
+    } catch (error) {
+      console.error('Conversion error:', error);
+      toast.error('Conversion failed', 'An error occurred during conversion. Please try again.');
+    } finally {
+      setProcessing(false);
+    }
+  }, [canConvert, onConvert, setProcessing]);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -60,22 +75,7 @@ export function ConversionPageTemplate({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [canConvert]);
-
-  const handleConvert = async () => {
-    if (!canConvert) return;
-
-    try {
-      setProcessing(true);
-      await onConvert();
-      toast.success('Conversion completed!', 'All files have been processed successfully.');
-    } catch (error) {
-      console.error('Conversion error:', error);
-      toast.error('Conversion failed', 'An error occurred during conversion. Please try again.');
-    } finally {
-      setProcessing(false);
-    }
-  };
+  }, [canConvert, handleConvert]);
 
   const handleDownloadAll = async () => {
     if (completedFiles.length === 0) return;
@@ -109,7 +109,7 @@ export function ConversionPageTemplate({
         animate={{ opacity: 1, y: 0 }}
         className="text-center space-y-4"
       >
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r mt-10 from-green-600 to-purple-600 bg-clip-text text-transparent">
           {title}
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -162,13 +162,16 @@ export function ConversionPageTemplate({
                 {isProcessing ? 'Converting...' : 'Start Conversion'}
               </button>
 
-              {completedFiles.length > 1 && (
+              {completedFiles.length > 0 && (
                 <button
                   onClick={handleDownloadAll}
                   className="btn-secondary w-full"
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  Download All ({completedFiles.length})
+                  {completedFiles.length === 1 
+                    ? 'Download Converted File' 
+                    : `Download All (${completedFiles.length})`
+                  }
                 </button>
               )}
 

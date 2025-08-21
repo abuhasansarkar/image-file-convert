@@ -32,21 +32,6 @@ export function Dropzone({
     setIsDragOver(false);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    
-    const files = Array.from(e.dataTransfer.files);
-    processFiles(files);
-  }, [conversionType, maxFiles]);
-
-  const handleFileInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    processFiles(files);
-    // Reset input value to allow selecting the same files again
-    e.target.value = '';
-  }, [conversionType, maxFiles]);
-
   const processFiles = useCallback((files: File[]) => {
     setErrors([]);
     
@@ -67,6 +52,21 @@ export function Dropzone({
       onFilesAccepted(valid);
     }
   }, [conversionType, maxFiles, onFilesAccepted]);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    processFiles(files);
+  }, [processFiles]);
+
+  const handleFileInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    processFiles(files);
+    // Reset input value to allow selecting the same files again
+    e.target.value = '';
+  }, [processFiles]);
 
   const getAcceptedTypes = () => {
     const typeMap = {

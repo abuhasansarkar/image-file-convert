@@ -6,21 +6,17 @@ import { QueryClientProvider } from '@/components/query-client-provider';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/toaster';
+import { NavigationLoader } from '@/components/navigation-loader';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Image Converter - Fast & Secure Image Conversion',
-  description: 'Convert images between formats quickly and securely in your browser. Supports JPG, PNG, WebP, PDF, HEIC, SVG, RAW, and BMP formats.',
-  keywords: 'image converter, jpg to webp, png to webp, pdf converter, heic converter, svg to png, raw converter',
+  title: 'Free Image Converter - Convert JPG, PNG, WebP, PDF & More Online',
+  description: 'Convert images between 8+ formats instantly. 100% free, secure, and private. All processing happens in your browser - no uploads required. Support for JPG, PNG, WebP, PDF, HEIC, SVG, RAW, and BMP.',
+  keywords: 'image converter, convert images online, JPG to WebP, PNG to WebP, PDF converter, HEIC converter, free image tools, online image conversion, secure image converter',
   authors: [{ name: 'Image Converter Team' }],
   creator: 'Image Converter',
   publisher: 'Image Converter',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   manifest: '/manifest.json',
   robots: {
     index: true,
@@ -71,6 +67,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <QueryClientProvider>
+            <NavigationLoader />
             <div className="min-h-screen flex flex-col bg-background">
               <Header />
               <main className="flex-1 container mx-auto px-4 py-8">

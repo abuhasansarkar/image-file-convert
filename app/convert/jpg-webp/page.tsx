@@ -15,7 +15,7 @@ export default function JpgToWebPPage() {
         updateFileStatus(file.id, 'processing', 0);
         
         const result = await convertJpgToWebP(file.file, {
-          quality: options.quality || 80,
+          quality: options.quality || 90,
           width: options.width,
           height: options.height,
           stripMetadata: options.stripMetadata || false,

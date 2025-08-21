@@ -15,7 +15,8 @@ export async function convertJpgToWebP(
     const ctx = canvas.getContext('2d', { 
       alpha: false,
       desynchronized: false,
-      colorSpace: 'srgb'
+      colorSpace: 'srgb',
+      willReadFrequently: false
     });
     
     if (!ctx) {
@@ -63,9 +64,13 @@ export async function convertJpgToWebP(
         // Scale context for high DPI displays
         ctx.scale(devicePixelRatio, devicePixelRatio);
         
-        // Improve image rendering quality
+        // Optimize image rendering quality
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
+        
+        // Set optimal composite operation for best quality
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 1.0;
 
         onProgress?.(50);
 
@@ -74,7 +79,10 @@ export async function convertJpgToWebP(
 
         onProgress?.(75);
 
-        // Convert to WebP with proper quality
+        // Convert to WebP with optimized quality settings
+        // Use higher quality for better image fidelity
+        const webpQuality = Math.max(0.75, Math.min(0.95, options.quality / 100));
+        
         canvas.toBlob(
           (blob) => {
             cleanup();
@@ -86,7 +94,7 @@ export async function convertJpgToWebP(
             }
           },
           'image/webp',
-          Math.max(0.1, Math.min(1.0, options.quality / 100))
+          webpQuality
         );
       } catch (error) {
         cleanup();
