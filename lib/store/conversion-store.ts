@@ -28,6 +28,15 @@ export interface ConversionOptions {
   bitDepth?: 8 | 16 | 32;
   demosaicQuality?: 'fast' | 'balanced' | 'high';
   whiteBalance?: 'auto' | 'daylight' | 'tungsten' | 'fluorescent';
+  // Image to Text options
+  language?: string;
+  outputFormat?: 'txt' | 'json';
+  confidence?: boolean;
+  preserveFormatting?: boolean;
+  // Additional converter options
+  preserveTransparency?: boolean;
+  extractFirstFrame?: boolean;
+  size?: number;
 }
 
 interface ConversionStore {
@@ -60,6 +69,10 @@ export const useConversionStore = create<ConversionStore>()((set, _get) => ({
       bitDepth: 8,
       demosaicQuality: 'balanced',
       whiteBalance: 'auto',
+      language: 'eng',
+      outputFormat: 'txt',
+      confidence: false,
+      preserveFormatting: false,
     },
     isProcessing: false,
     maxConcurrency: 2,

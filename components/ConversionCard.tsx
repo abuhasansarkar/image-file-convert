@@ -7,9 +7,20 @@ import {
   Palette,
   Camera,
   FileImage,
+  Type,
+  Image,
+  Layers,
 } from "lucide-react";
 
 const conversions = [
+  {
+    name: "Any Image → WebP",
+    href: "/",
+    description:
+      "Convert any image to modern WebP format for better compression",
+    icon: ImageIcon,
+    color: "from-green-500 to-cyan-500",
+  },
   {
     name: "JPG → WebP",
     href: "/convert/jpg-webp",
@@ -67,6 +78,41 @@ const conversions = [
     icon: FileImage,
     color: "from-rose-500 to-red-500",
   },
+  {
+    name: "Image → Text",
+    href: "/convert/image-text",
+    description: "Extract text from images using OCR technology",
+    icon: Type,
+    color: "from-violet-500 to-purple-500",
+  },
+  {
+    name: "WebP → PNG",
+    href: "/convert/webp-png",
+    description: "Convert WebP images to PNG format with transparency",
+    icon: Image,
+    color: "from-cyan-500 to-blue-500",
+  },
+  {
+    name: "TIFF → JPG",
+    href: "/convert/tiff-jpg",
+    description: "Convert TIFF images to compressed JPG format",
+    icon: FileImage,
+    color: "from-amber-500 to-orange-500",
+  },
+  {
+    name: "GIF → PNG",
+    href: "/convert/gif-png",
+    description: "Convert animated GIF to static PNG image",
+    icon: Layers,
+    color: "from-pink-500 to-rose-500",
+  },
+  {
+    name: "ICO → PNG",
+    href: "/convert/ico-png",
+    description: "Convert icon files to PNG format",
+    icon: Palette,
+    color: "from-indigo-500 to-blue-500",
+  },
 ];
 
 const ConversionCard = () => {
@@ -75,7 +121,7 @@ const ConversionCard = () => {
       {/* Conversion Grid */}
       <section className="space-y-10 py-10">
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold">Choose Your Conversion</h2>
+          <h2 className="text-5xl font-bold">Choose Your Conversion</h2>
           <p className="text-muted-foreground">
             Select the format conversion you need from the options below
           </p>

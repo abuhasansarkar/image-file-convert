@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useConversionStore, type ConversionFile } from '@/lib/store/conversion-store';
 import { ProgressBar } from './progress-bar';
+import { PdfPreview } from './pdf-preview';
 import { cn } from '@/lib/utils/cn';
 import { formatFileSize, createDownloadLink, getOutputFilename } from '@/lib/utils/file-utils';
 
@@ -64,6 +65,10 @@ export function FileQueue({ outputFormat, className }: FileQueueProps) {
     if (file.outputUrl) {
       setPreviewFile(file);
     }
+  };
+
+  const isPdfFile = (filename: string) => {
+    return filename.toLowerCase().endsWith('.pdf') || outputFormat.toLowerCase() === 'pdf';
   };
 
   if (files.length === 0) {
@@ -183,43 +188,52 @@ export function FileQueue({ outputFormat, className }: FileQueueProps) {
       {/* Preview Modal */}
       <AnimatePresence>
         {previewFile && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-            onClick={() => setPreviewFile(null)}
-          >
+          isPdfFile(getOutputFilename(previewFile.name, outputFormat)) ? (
+            <PdfPreview
+              pdfUrl={previewFile.outputUrl!}
+              filename={getOutputFilename(previewFile.name, outputFormat)}
+              onClose={() => setPreviewFile(null)}
+              onDownload={() => handleDownload(previewFile)}
+            />
+          ) : (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="card max-w-4xl max-h-[90vh] overflow-auto"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+              onClick={() => setPreviewFile(null)}
             >
-              <div className="p-4 border-b flex items-center justify-between">
-                <h3 className="text-lg font-semibold">
-                  {getOutputFilename(previewFile.name, outputFormat)}
-                </h3>
-                <button
-                  onClick={() => setPreviewFile(null)}
-                  className="btn-ghost p-2 h-auto"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              
-              <div className="p-4">
-                {previewFile.outputUrl && (
-                  <img
-                    src={previewFile.outputUrl}
-                    alt="Preview"
-                    className="max-w-full h-auto rounded-md"
-                  />
-                )}
-              </div>
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="card max-w-4xl max-h-[90vh] overflow-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="p-4 border-b flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">
+                    {getOutputFilename(previewFile.name, outputFormat)}
+                  </h3>
+                  <button
+                    onClick={() => setPreviewFile(null)}
+                    className="btn-ghost p-2 h-auto"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                
+                <div className="p-4">
+                  {previewFile.outputUrl && (
+                    <img
+                      src={previewFile.outputUrl}
+                      alt="Preview"
+                      className="max-w-full h-auto rounded-md"
+                    />
+                  )}
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          )
         )}
       </AnimatePresence>
     </div>

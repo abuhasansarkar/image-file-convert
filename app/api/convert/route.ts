@@ -6,6 +6,11 @@ import { convertPdfToJpg } from '@/lib/converters/pdf-jpg-converter';
 import { convertHeicToJpg } from '@/lib/converters/heic-jpg-converter';
 import { convertSvgToPng } from '@/lib/converters/svg-png-converter';
 import { convertBmpToPng } from '@/lib/converters/bmp-png-converter';
+import { convertImageToText } from '@/lib/converters/image-text-converter';
+import { convertWebpToPng } from '@/lib/converters/webp-png-converter';
+import { convertTiffToJpg } from '@/lib/converters/tiff-jpg-converter';
+import { convertGifToPng } from '@/lib/converters/gif-png-converter';
+import { convertIcoToPng } from '@/lib/converters/ico-png-converter';
 import { validateFiles, ConversionType } from '@/lib/utils/file-utils';
 
 export async function POST(request: NextRequest) {
@@ -40,62 +45,93 @@ export async function POST(request: NextRequest) {
 
     const results: { name: string; blob: Blob; success: boolean; error?: string }[] = [];
 
-    // Process each file based on conversion type
-    for (const file of valid) {
+    // Handle images-pdf conversion separately (combines all files into one PDF)
+    if (conversionType === 'images-pdf') {
       try {
-        let convertedBlob: Blob | Blob[];
-
-        switch (conversionType) {
-          case 'jpg-webp':
-            convertedBlob = await convertJpgToWebP(file, options);
-            break;
-          case 'png-webp':
-            convertedBlob = await convertPngToWebP(file, options);
-            break;
-          case 'images-pdf':
-            convertedBlob = await convertImagesToPdf([file], options);
-            break;
-          case 'pdf-jpg':
-            convertedBlob = await convertPdfToJpg(file, options);
-            break;
-          case 'heic-jpg':
-            convertedBlob = await convertHeicToJpg(file, options);
-            break;
-          case 'svg-png':
-            convertedBlob = await convertSvgToPng(file, options);
-            break;
-          case 'bmp-png':
-            convertedBlob = await convertBmpToPng(file, options);
-            break;
-          case 'raw-tiff':
-            throw new Error('RAW to TIFF conversion requires specialized server-side processing');
-          default:
-            throw new Error(`Unsupported conversion type: ${conversionType}`);
-        }
-
-        // Handle single blob or array of blobs
-        if (Array.isArray(convertedBlob)) {
-          convertedBlob.forEach((blob, index) => {
-            results.push({
-              name: `${file.name.split('.')[0]}_page_${index + 1}`,
-              blob,
-              success: true
-            });
-          });
-        } else {
-          results.push({
-            name: file.name,
-            blob: convertedBlob,
-            success: true
-          });
-        }
+        const convertedBlob = await convertImagesToPdf(valid, options);
+        results.push({
+          name: `converted_images.pdf`,
+          blob: convertedBlob,
+          success: true
+        });
       } catch (error) {
         results.push({
-          name: file.name,
+          name: 'conversion_failed.pdf',
           blob: new Blob(),
           success: false,
           error: error instanceof Error ? error.message : 'Unknown error'
         });
+      }
+    } else {
+      // Process each file individually for other conversion types
+      for (const file of valid) {
+        try {
+          let convertedBlob: Blob | Blob[];
+
+          switch (conversionType) {
+            case 'jpg-webp':
+              convertedBlob = await convertJpgToWebP(file, options);
+              break;
+            case 'png-webp':
+              convertedBlob = await convertPngToWebP(file, options);
+              break;
+            case 'pdf-jpg':
+              convertedBlob = await convertPdfToJpg(file, options);
+              break;
+            case 'heic-jpg':
+              convertedBlob = await convertHeicToJpg(file, options);
+              break;
+            case 'svg-png':
+              convertedBlob = await convertSvgToPng(file, options);
+              break;
+            case 'bmp-png':
+              convertedBlob = await convertBmpToPng(file, options);
+              break;
+            case 'image-text':
+              convertedBlob = await convertImageToText(file, options);
+              break;
+            case 'webp-png':
+              convertedBlob = await convertWebpToPng(file, options);
+              break;
+            case 'tiff-jpg':
+              convertedBlob = await convertTiffToJpg(file, options);
+              break;
+            case 'gif-png':
+              convertedBlob = await convertGifToPng(file, options);
+              break;
+            case 'ico-png':
+              convertedBlob = await convertIcoToPng(file, options);
+              break;
+            case 'raw-tiff':
+              throw new Error('RAW to TIFF conversion requires specialized server-side processing');
+            default:
+              throw new Error(`Unsupported conversion type: ${conversionType}`);
+          }
+
+          // Handle single blob or array of blobs
+          if (Array.isArray(convertedBlob)) {
+            convertedBlob.forEach((blob, index) => {
+              results.push({
+                name: `${file.name.split('.')[0]}_page_${index + 1}`,
+                blob,
+                success: true
+              });
+            });
+          } else {
+            results.push({
+              name: file.name,
+              blob: convertedBlob,
+              success: true
+            });
+          }
+        } catch (error) {
+          results.push({
+            name: file.name,
+            blob: new Blob(),
+            success: false,
+            error: error instanceof Error ? error.message : 'Unknown error'
+          });
+        }
       }
     }
 
@@ -152,7 +188,12 @@ export async function GET() {
       'pdf-jpg',
       'heic-jpg',
       'svg-png',
-      'bmp-png'
+      'bmp-png',
+      'image-text',
+      'webp-png',
+      'tiff-jpg',
+      'gif-png',
+      'ico-png'
     ],
     note: 'RAW to TIFF conversion requires specialized libraries and is not available via API'
   });

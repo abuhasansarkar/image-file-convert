@@ -11,7 +11,7 @@ export default function Loading() {
           <div className="w-24 h-24 mx-auto rounded-full border-4 border-primary/20 border-t-primary animate-spin"></div>
           
           {/* Inner pulsing circle */}
-          <div className="absolute inset-0 w-16 h-16 mx-auto mt-4 rounded-full bg-gradient-to-r from-primary/20 to-purple-500/20 animate-pulse flex items-center justify-center">
+          <div className="absolute inset-0 w-16 h-16 mx-auto mt-4 rounded-full bg-gradient-to-r from-primary/20 to-purple-900/20 animate-pulse flex items-center justify-center">
             <ImageIcon className="w-8 h-8 text-primary animate-bounce" />
           </div>
           
@@ -23,7 +23,7 @@ export default function Loading() {
 
         {/* Loading Text with Animation */}
         <div className="space-y-3">
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent animate-pulse">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent animate-pulse">
             Loading...
           </h2>
           

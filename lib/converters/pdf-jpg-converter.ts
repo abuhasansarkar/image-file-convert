@@ -1,7 +1,15 @@
 import * as pdfjsLib from 'pdfjs-dist';
 
-// Set up PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// Set up PDF.js worker with multiple fallbacks
+if (typeof window !== 'undefined') {
+  try {
+    // Try to use local worker first
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+  } catch {
+    // Fallback to CDN with HTTPS
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+  }
+}
 
 export interface PdfToJpgOptions {
   dpi: number;
@@ -14,8 +22,20 @@ export async function convertPdfToJpg(
   options: PdfToJpgOptions,
   onProgress?: (progress: number) => void
 ): Promise<Blob[]> {
-  const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  try {
+    onProgress?.(5);
+    const arrayBuffer = await file.arrayBuffer();
+    onProgress?.(10);
+    
+    const loadingTask = pdfjsLib.getDocument({ 
+      data: arrayBuffer,
+      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
+      cMapPacked: true,
+      standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/standard_fonts/'
+    });
+    
+    const pdf = await loadingTask.promise;
+    onProgress?.(15);
   
   const totalPages = pdf.numPages;
   const pagesToConvert = parsePageRange(options.pageRange, totalPages);
@@ -82,6 +102,10 @@ export async function convertPdfToJpg(
   
   onProgress?.(100);
   return results;
+  } catch (error) {
+    console.error('PDF to JPG conversion error:', error);
+    throw new Error(`Failed to convert PDF to JPG: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
 }
 
 function parsePageRange(pageRange: string | undefined, totalPages: number): number[] {

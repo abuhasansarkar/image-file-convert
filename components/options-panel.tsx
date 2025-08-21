@@ -353,6 +353,200 @@ export function OptionsPanel({ conversionType, className }: OptionsPanelProps) {
           </div>
         );
 
+      case 'image-text':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Language</label>
+              <select
+                value={options.language || 'eng'}
+                onChange={(e) => handleOptionChange('language', e.target.value)}
+                className="input"
+              >
+                <option value="eng">English</option>
+                <option value="spa">Spanish</option>
+                <option value="fra">French</option>
+                <option value="deu">German</option>
+                <option value="ita">Italian</option>
+                <option value="por">Portuguese</option>
+                <option value="rus">Russian</option>
+                <option value="chi_sim">Chinese (Simplified)</option>
+                <option value="chi_tra">Chinese (Traditional)</option>
+                <option value="jpn">Japanese</option>
+                <option value="kor">Korean</option>
+                <option value="ara">Arabic</option>
+                <option value="hin">Hindi</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Output Format</label>
+              <select
+                value={options.outputFormat || 'txt'}
+                onChange={(e) => handleOptionChange('outputFormat', e.target.value as 'txt' | 'json')}
+                className="input"
+              >
+                <option value="txt">Plain Text (.txt)</option>
+                <option value="json">JSON with metadata (.json)</option>
+              </select>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="confidence"
+                checked={options.confidence || false}
+                onChange={(e) => handleOptionChange('confidence', e.target.checked)}
+                className="rounded border-gray-300 text-primary focus:ring-primary"
+              />
+              <label htmlFor="confidence" className="text-sm font-medium">
+                Include confidence scores
+              </label>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="preserveFormatting"
+                checked={options.preserveFormatting || false}
+                onChange={(e) => handleOptionChange('preserveFormatting', e.target.checked)}
+                className="rounded border-gray-300 text-primary focus:ring-primary"
+              />
+              <label htmlFor="preserveFormatting" className="text-sm font-medium">
+                Preserve text formatting
+              </label>
+            </div>
+          </div>
+        );
+
+      case 'webp-png':
+      case 'gif-png':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Quality</label>
+              <div className="space-y-2">
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  value={options.quality || 90}
+                  onChange={(e) => handleOptionChange('quality', parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>1</span>
+                  <span>{options.quality || 90}%</span>
+                  <span>100</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="preserveTransparency"
+                checked={options.preserveTransparency || true}
+                onChange={(e) => handleOptionChange('preserveTransparency', e.target.checked)}
+                className="rounded border-gray-300 text-primary focus:ring-primary"
+              />
+              <label htmlFor="preserveTransparency" className="text-sm font-medium">
+                Preserve transparency
+              </label>
+            </div>
+
+            {conversionType === 'gif-png' && (
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="extractFirstFrame"
+                  checked={options.extractFirstFrame || true}
+                  onChange={(e) => handleOptionChange('extractFirstFrame', e.target.checked)}
+                  className="rounded border-gray-300 text-primary focus:ring-primary"
+                />
+                <label htmlFor="extractFirstFrame" className="text-sm font-medium">
+                  Extract first frame only
+                </label>
+              </div>
+            )}
+          </div>
+        );
+
+      case 'tiff-jpg':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Quality</label>
+              <div className="space-y-2">
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  value={options.quality || 85}
+                  onChange={(e) => handleOptionChange('quality', parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>1</span>
+                  <span>{options.quality || 85}%</span>
+                  <span>100</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Background Color</label>
+              <input
+                type="color"
+                value={options.backgroundColor || '#ffffff'}
+                onChange={(e) => handleOptionChange('backgroundColor', e.target.value)}
+                className="w-full h-10 rounded-md border border-input cursor-pointer"
+              />
+            </div>
+          </div>
+        );
+
+      case 'ico-png':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Output Size</label>
+              <select
+                value={options.size || 256}
+                onChange={(e) => handleOptionChange('size', parseInt(e.target.value))}
+                className="input"
+              >
+                <option value="16">16×16</option>
+                <option value="32">32×32</option>
+                <option value="48">48×48</option>
+                <option value="64">64×64</option>
+                <option value="128">128×128</option>
+                <option value="256">256×256</option>
+                <option value="512">512×512</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Quality</label>
+              <div className="space-y-2">
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  value={options.quality || 90}
+                  onChange={(e) => handleOptionChange('quality', parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>1</span>
+                  <span>{options.quality || 90}%</span>
+                  <span>100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return (
           <div className="text-center text-muted-foreground py-4">

@@ -9,9 +9,9 @@ import { ThemeToggle } from './theme-toggle';
 import { cn } from '@/lib/utils/cn';
 
 const conversions = [
-  { name: 'JPG → WebP', href: '/convert/jpg-webp' },
-  { name: 'PNG → WebP', href: '/convert/png-webp' },
+  { name: 'AnyImage → WebP', href: '/' },
   { name: 'Images → PDF', href: '/convert/images-pdf' },
+  { name: 'Images → Text', href: '/convert/image-text' },
   { name: 'PDF → JPG', href: '/convert/pdf-jpg' },
   { name: 'HEIC → JPG', href: '/convert/heic-jpg' },
   { name: 'SVG → PNG', href: '/convert/svg-png' },

@@ -79,7 +79,7 @@ export function Dropzone({
       'raw-tiff': '.cr2,.crw,.nef,.arw,.dng',
       'bmp-png': '.bmp',
     };
-    return typeMap[conversionType] || '';
+    return typeMap[conversionType as keyof typeof typeMap] || '';
   };
 
   return (

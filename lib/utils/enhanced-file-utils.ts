@@ -151,7 +151,11 @@ export function getOptimalFormat(conversionType: ConversionType): {
     'bmp-png': { mimeType: 'image/png', extension: 'png', supportsTransparency: true },
   };
 
-  return formatMap[conversionType];
+  const format = formatMap[conversionType as keyof typeof formatMap];
+  if (!format) {
+    throw new Error(`Unsupported conversion type: ${conversionType}`);
+  }
+  return format;
 }
 
 export async function convertBlobToHighQuality(

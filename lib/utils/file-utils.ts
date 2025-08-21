@@ -3,12 +3,17 @@ export const MAX_FILE_SIZE = 200 * 1024 * 1024; // 200MB
 export const SUPPORTED_FORMATS = {
   'jpg-webp': ['image/jpeg', 'image/jpg'],
   'png-webp': ['image/png'],
+  'webp-png': ['image/webp'],
+  'tiff-jpg': ['image/tiff', 'image/tif'],
+  'gif-png': ['image/gif'],
+  'ico-png': ['image/x-icon', 'image/vnd.microsoft.icon'],
   'images-pdf': ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'],
   'pdf-jpg': ['application/pdf'],
   'heic-jpg': ['image/heic', 'image/heif'],
   'svg-png': ['image/svg+xml'],
   'raw-tiff': ['image/x-canon-cr2', 'image/x-canon-crw', 'image/x-nikon-nef', 'image/x-sony-arw', 'image/x-adobe-dng'],
   'bmp-png': ['image/bmp'],
+  'image-text': ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/tiff'],
 } as const;
 
 export type ConversionType = keyof typeof SUPPORTED_FORMATS;
@@ -78,7 +83,9 @@ export function getOutputFilename(inputFilename: string, outputFormat: string): 
     'jpeg': 'jpg',
     'png': 'png',
     'tiff': 'tiff',
-    'tif': 'tiff'
+    'tif': 'tiff',
+    'txt': 'txt',
+    'json': 'json'
   };
   
   const extension = formatExtensionMap[outputFormat.toLowerCase()] || outputFormat.toLowerCase();
