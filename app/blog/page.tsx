@@ -45,7 +45,7 @@ const blogPosts = [
     image: '/blog/images-pdf-business.jpg',
   },
   {
-    slug: 'pdf-to-jpg-extraction-guide',
+    slug: 'pdf-to-jpg-extract-images',
     title: 'PDF to JPG: Extract Images Like a Pro',
     description: 'Extract high-quality images from PDF documents with ease. Learn the best practices for maintaining image quality during extraction.',
     category: 'Productivity',
@@ -65,7 +65,7 @@ const blogPosts = [
     image: '/blog/heic-jpg-iphone.jpg',
   },
   {
-    slug: 'svg-to-png-vector-conversion',
+    slug: 'svg-to-png-converter-guide',
     title: 'SVG to PNG: When and How to Convert Vector Graphics',
     description: 'Convert scalable vector graphics to raster images for broader compatibility. Learn the best practices for quality conversion.',
     category: 'Design',
@@ -75,7 +75,7 @@ const blogPosts = [
     image: '/blog/svg-png-conversion.jpg',
   },
   {
-    slug: 'raw-to-tiff-photography-workflow',
+    slug: 'raw-to-tiff-photography-professional-workflow',
     title: 'RAW to TIFF: Professional Photography Workflow',
     description: 'Process camera RAW files into high-quality TIFF images. Essential guide for photographers and digital artists.',
     category: 'Photography',

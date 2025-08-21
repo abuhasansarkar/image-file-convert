@@ -3,7 +3,7 @@ import { ArrowLeft, Home, Search, FileQuestion } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="flex items-center justify-center px-5">
       <div className="max-w-2xl mx-auto text-center space-y-8">
         {/* Animated 404 Icon */}
         <div className="relative">

@@ -47,6 +47,7 @@ export default function ImagesToPdfGuide() {
         
         <div className="card p-6 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20">
           <div className="flex items-start gap-4">
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <Image className="w-8 h-8 text-red-500 mt-1" />
             <div className="space-y-3">
               <h3 className="text-lg font-semibold text-red-700 dark:text-red-400">The Scattered Images Problem</h3>
@@ -134,6 +135,7 @@ export default function ImagesToPdfGuide() {
 
           <div className="card p-6 space-y-4">
             <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
               <Image className="w-6 h-6 text-purple-600" />
             </div>
             <h3 className="text-lg font-semibold">Creative Professionals</h3>

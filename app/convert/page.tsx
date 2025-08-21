@@ -1,11 +1,12 @@
 import React from 'react';
-import { HeroWebPConverter } from '@/components/hero-webp-converter';
+
+import ConversionCard from '@/components/ConversionCard';
 
 const ConvertPage = () => {
     return (
-        <div>
-            <HeroWebPConverter />
-        </div>
+  
+            <ConversionCard />
+  
     );
 };
 

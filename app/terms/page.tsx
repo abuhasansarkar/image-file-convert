@@ -291,8 +291,8 @@ export default function TermsPage() {
               <p>
                 If you have questions about these terms or our service, please contact us:
               </p>
-              <p>• Email: legal@imageconverter.app</p>
-              <p>• Contact form: <a href="/contact" className="text-primary hover:underline">Contact page</a></p>
+              <p>• Email: <Link href="mailto:abuhasansarkar2@gmail.com" className="text-primary font-semibold hover:underline">abuhasansarkar2@gmail.com</Link></p>
+              <p>• Contact form: <Link href="/contact" className="text-primary hover:underline">Contact page</Link></p>
               <p>
                 We welcome feedback and will respond to legitimate inquiries promptly.
               </p>
@@ -344,9 +344,9 @@ export default function TermsPage() {
           <Link href="/" className="btn-primary">
             Start Converting
           </Link>
-          <a href="/contact" className="btn-ghost">
+          <Link href="/contact" className="btn-ghost">
             Ask Questions
-          </a>
+          </Link>
         </div>
       </section>
     </div>

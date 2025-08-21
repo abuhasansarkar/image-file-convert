@@ -101,7 +101,7 @@ export function BlogCardsFooter({ currentSlug, title = "More Image Conversion Gu
     <section className="mt-16 pt-12 border-t border-border">
       <div className="space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold">{title}</h2>
+          <h2 className="text-2xl md:text-4xl font-bold">{title}</h2>
           <p className="text-muted-foreground">
             Discover more expert tips and conversion techniques
           </p>
