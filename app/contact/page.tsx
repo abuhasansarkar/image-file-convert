@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Mail, MessageSquare, Github, Heart, Clock, MapPin } from 'lucide-react';
+import ContactForm from '@/components/contact-form';
 
 export const metadata: Metadata = {
   title: 'Contact Us - Free Image Converter',
@@ -123,65 +124,7 @@ export default function ContactPage() {
         </div>
 
         <div className="card p-8 max-w-2xl mx-auto">
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="input w-full"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="input w-full"
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                Subject
-              </label>
-              <select id="subject" name="subject" className="input w-full">
-                <option value="">Select a topic</option>
-                <option value="feedback">General Feedback</option>
-                <option value="bug">Bug Report</option>
-                <option value="feature">Feature Request</option>
-                <option value="question">Question</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={6}
-                className="input w-full resize-vertical"
-                placeholder="Tell us what's on your mind..."
-              ></textarea>
-            </div>
-
-            <button type="submit" className="btn-primary w-full">
-              Send Message
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
 

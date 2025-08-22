@@ -15,13 +15,113 @@ export const metadata: Metadata = {
 
 const blogPosts = [
   {
+    slug: 'heic-to-jpg-complete-guide',
+    title: 'HEIC to JPG Complete Guide: Convert iPhone Photos Easily',
+    description: 'Complete guide to converting HEIC to JPG format. Learn about compatibility, quality settings, and best practices for iPhone photo conversion.',
+    category: 'Mobile',
+    readTime: '8 min read',
+    publishDate: 'Read More...',
+    featured: true,
+    image: '/blog/heic-jpg-guide.jpg',
+  },
+  {
+    slug: 'svg-to-png-vector-conversion',
+    title: 'SVG to PNG Vector Conversion: Complete Guide',
+    description: 'Master SVG to PNG conversion with our comprehensive guide. Learn about vector vs raster, quality settings, and best practices.',
+    category: 'Design',
+    readTime: '10 min read',
+    publishDate: 'Read More...',
+    featured: true,
+    image: '/blog/svg-png-vector.jpg',
+  },
+  {
+    slug: 'webp-to-png-transparency-guide',
+    title: 'WebP to PNG Transparency Guide: Preserve Image Quality',
+    description: 'Convert WebP to PNG while preserving transparency. Learn about format differences, browser support, and optimization techniques.',
+    category: 'Web Optimization',
+    readTime: '7 min read',
+    publishDate: 'Read More...',
+    featured: true,
+    image: '/blog/webp-png-transparency.jpg',
+  },
+  {
+    slug: 'jpg-to-webp-optimization',
+    title: 'JPG to WebP Optimization: Boost Web Performance',
+    description: 'Optimize your website with JPG to WebP conversion. Reduce file sizes by up to 80% while maintaining excellent image quality.',
+    category: 'Web Optimization',
+    readTime: '9 min read',
+    publishDate: 'Read More...',
+    featured: true,
+    image: '/blog/jpg-webp-optimization.jpg',
+  },
+  {
+    slug: 'png-to-webp-compression',
+    title: 'PNG to WebP Compression: Modern Image Optimization',
+    description: 'Convert PNG to WebP for better compression and transparency support. Essential guide for modern web development.',
+    category: 'Web Optimization',
+    readTime: '8 min read',
+    publishDate: 'Read More...',
+    featured: false,
+    image: '/blog/png-webp-compression.jpg',
+  },
+  {
+    slug: 'pdf-to-jpg-conversion-guide',
+    title: 'PDF to JPG Conversion Guide: Extract Images Perfectly',
+    description: 'Convert PDF documents to high-quality JPG images. Learn about resolution settings, batch processing, and quality optimization.',
+    category: 'Productivity',
+    readTime: '6 min read',
+    publishDate: 'Read More...',
+    featured: false,
+    image: '/blog/pdf-jpg-conversion.jpg',
+  },
+  {
+    slug: 'image-format-comparison-guide',
+    title: 'Image Format Comparison: JPG vs PNG vs WebP vs HEIC',
+    description: 'Comprehensive comparison of modern image formats. Understand when to use JPG, PNG, WebP, HEIC, and SVG for optimal results.',
+    category: 'Education',
+    readTime: '12 min read',
+    publishDate: 'Read More...',
+    featured: true,
+    image: '/blog/image-format-comparison.jpg',
+  },
+  {
+    slug: 'web-performance-image-optimization',
+    title: 'Web Performance Image Optimization: Core Web Vitals Guide',
+    description: 'Master image optimization for Core Web Vitals. Learn compression techniques, lazy loading, and modern format adoption.',
+    category: 'Web Performance',
+    readTime: '15 min read',
+    publishDate: 'Read More...',
+    featured: true,
+    image: '/blog/web-performance-optimization.jpg',
+  },
+  {
+    slug: 'batch-image-conversion-guide',
+    title: 'Batch Image Conversion: Process Hundreds of Images at Once',
+    description: 'Save hours with batch image conversion. Learn workflows for processing multiple images simultaneously with consistent quality.',
+    category: 'Productivity',
+    readTime: '10 min read',
+    publishDate: 'Read More...',
+    featured: false,
+    image: '/blog/batch-conversion-guide.jpg',
+  },
+  {
+    slug: 'mobile-image-formats-guide',
+    title: 'Mobile Image Formats Guide: iOS vs Android Compatibility',
+    description: 'Navigate mobile image formats across iOS and Android. Understand HEIC, JPG, PNG compatibility for seamless photo sharing.',
+    category: 'Mobile',
+    readTime: '11 min read',
+    publishDate: 'Read More...',
+    featured: false,
+    image: '/blog/mobile-formats-guide.jpg',
+  },
+  {
     slug: 'jpg-to-webp-converter-guide',
     title: 'Why You Need a JPG to WebP Converter in 2025',
     description: 'Discover how converting JPG to WebP can reduce image sizes by up to 80% while maintaining quality. Essential for website optimization.',
     category: 'Web Optimization',
     readTime: '5 min read',
-    publishDate: '2024-12-20',
-    featured: true,
+    publishDate: 'Read More...',
+    featured: false,
     image: '/blog/jpg-webp-conversion.jpg',
   },
   {
@@ -30,69 +130,9 @@ const blogPosts = [
     description: 'Learn when and how to convert PNG to WebP format. Preserve transparency while dramatically reducing file sizes for better performance.',
     category: 'Design',
     readTime: '6 min read',
-    publishDate: '2024-12-19',
-    featured: true,
+    publishDate: 'Read More...',
+    featured: false,
     image: '/blog/png-webp-guide.jpg',
-  },
-  {
-    slug: 'images-to-pdf-converter-business',
-    title: 'Images to PDF Converter: Essential Tool for Business',
-    description: 'Transform multiple images into professional PDF documents. Perfect for reports, presentations, and document management.',
-    category: 'Business',
-    readTime: '4 min read',
-    publishDate: '2024-12-18',
-    featured: false,
-    image: '/blog/images-pdf-business.jpg',
-  },
-  {
-    slug: 'pdf-to-jpg-extract-images',
-    title: 'PDF to JPG: Extract Images Like a Pro',
-    description: 'Extract high-quality images from PDF documents with ease. Learn the best practices for maintaining image quality during extraction.',
-    category: 'Productivity',
-    readTime: '5 min read',
-    publishDate: '2024-12-17',
-    featured: false,
-    image: '/blog/pdf-jpg-extraction.jpg',
-  },
-  {
-    slug: 'heic-to-jpg-iphone-photos',
-    title: 'HEIC to JPG: Convert iPhone Photos for Universal Compatibility',
-    description: 'Solve iPhone photo compatibility issues by converting HEIC to JPG. Share your photos anywhere without format restrictions.',
-    category: 'Mobile',
-    readTime: '4 min read',
-    publishDate: '2024-12-16',
-    featured: true,
-    image: '/blog/heic-jpg-iphone.jpg',
-  },
-  {
-    slug: 'svg-to-png-converter-guide',
-    title: 'SVG to PNG: When and How to Convert Vector Graphics',
-    description: 'Convert scalable vector graphics to raster images for broader compatibility. Learn the best practices for quality conversion.',
-    category: 'Design',
-    readTime: '6 min read',
-    publishDate: '2024-12-15',
-    featured: false,
-    image: '/blog/svg-png-conversion.jpg',
-  },
-  {
-    slug: 'raw-to-tiff-photography-professional-workflow',
-    title: 'RAW to TIFF: Professional Photography Workflow',
-    description: 'Process camera RAW files into high-quality TIFF images. Essential guide for photographers and digital artists.',
-    category: 'Photography',
-    readTime: '7 min read',
-    publishDate: '2024-12-14',
-    featured: false,
-    image: '/blog/raw-tiff-photography.jpg',
-  },
-  {
-    slug: 'bmp-to-png-optimization',
-    title: 'BMP to PNG: Optimize Legacy Images for Modern Web',
-    description: 'Convert outdated BMP files to efficient PNG format. Reduce file sizes while maintaining image quality for web use.',
-    category: 'Web Optimization',
-    readTime: '4 min read',
-    publishDate: '2024-12-13',
-    featured: false,
-    image: '/blog/bmp-png-optimization.jpg',
   },
 ];
 
@@ -144,7 +184,7 @@ export default function BlogPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Calendar className="w-3 h-3" />
-                    <span>{new Date(post.publishDate).toLocaleDateString()}</span>
+                    <span>{post.publishDate}</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -183,7 +223,7 @@ export default function BlogPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     <Calendar className="w-4 h-4" />
-                    <span>{new Date(post.publishDate).toLocaleDateString()}</span>
+                    <span>{post.publishDate}</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
                 </div>

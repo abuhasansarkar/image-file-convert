@@ -1,6 +1,51 @@
 import { Canvg } from 'canvg';
 import { sanitizeSVG } from '@/lib/utils/file-utils';
 
+// Enhanced SVG dimension detection
+function getSVGDimensions(svgElement: SVGSVGElement): { width: number; height: number } {
+  let width = 300;
+  let height = 150;
+
+  // Try viewBox first
+  const viewBox = svgElement.getAttribute('viewBox');
+  if (viewBox) {
+    const [, , vbWidth, vbHeight] = viewBox.split(/\s+/).map(Number);
+    if (!isNaN(vbWidth) && !isNaN(vbHeight) && vbWidth > 0 && vbHeight > 0) {
+      width = vbWidth;
+      height = vbHeight;
+      return { width, height };
+    }
+  }
+
+  // Try width/height attributes
+  const svgWidth = svgElement.getAttribute('width');
+  const svgHeight = svgElement.getAttribute('height');
+  
+  if (svgWidth && svgHeight) {
+    const parsedWidth = parseFloat(svgWidth.replace(/[^0-9.]/g, ''));
+    const parsedHeight = parseFloat(svgHeight.replace(/[^0-9.]/g, ''));
+    
+    if (!isNaN(parsedWidth) && !isNaN(parsedHeight) && parsedWidth > 0 && parsedHeight > 0) {
+      width = parsedWidth;
+      height = parsedHeight;
+      return { width, height };
+    }
+  }
+
+  // Try getBBox as fallback (if available)
+  try {
+    const bbox = svgElement.getBBox();
+    if (bbox.width > 0 && bbox.height > 0) {
+      width = bbox.width;
+      height = bbox.height;
+    }
+  } catch {
+    // getBBox might not be available in all contexts
+  }
+
+  return { width, height };
+}
+
 export interface SvgToPngOptions {
   scale: number;
   backgroundColor: string;
@@ -37,23 +82,18 @@ export async function convertSvgToPng(
       const svgDoc = parser.parseFromString(sanitizedSvg, 'image/svg+xml');
       const svgElement = svgDoc.documentElement;
 
-      // Get SVG dimensions
-      let width = 300; // default width
-      let height = 150; // default height
-
-      const viewBox = svgElement.getAttribute('viewBox');
-      if (viewBox) {
-        const [, , vbWidth, vbHeight] = viewBox.split(' ').map(Number);
-        width = vbWidth;
-        height = vbHeight;
-      } else {
-        const svgWidth = svgElement.getAttribute('width');
-        const svgHeight = svgElement.getAttribute('height');
-        if (svgWidth && svgHeight) {
-          width = parseFloat(svgWidth);
-          height = parseFloat(svgHeight);
-        }
+      // Check for parsing errors
+      const parserError = svgDoc.querySelector('parsererror');
+      if (parserError) {
+        throw new Error('Invalid SVG format: ' + parserError.textContent);
       }
+
+      if (svgElement.tagName.toLowerCase() !== 'svg') {
+        throw new Error('File does not contain valid SVG content');
+      }
+
+      // Get SVG dimensions with enhanced detection
+      const { width, height } = getSVGDimensions(svgElement as unknown as SVGSVGElement);
 
       // Apply scale and DPI with device pixel ratio for high quality
       const devicePixelRatio = window.devicePixelRatio || 1;
@@ -84,15 +124,40 @@ export async function convertSvgToPng(
       onProgress?.(75);
 
       // Render SVG to canvas using Canvg with high quality settings
-      const v = Canvg.fromString(ctx, sanitizedSvg, {
-        ignoreDimensions: true,
-        scaleWidth: finalWidth,
-        scaleHeight: finalHeight,
-        enableRedraw: false,
-        ignoreClear: true,
-      });
+      try {
+        const v = Canvg.fromString(ctx, sanitizedSvg, {
+          ignoreDimensions: true,
+          scaleWidth: finalWidth,
+          scaleHeight: finalHeight,
+          enableRedraw: false,
+          ignoreClear: true,
+          offsetX: 0,
+          offsetY: 0,
+        });
 
-      await v.render();
+        await v.render();
+      } catch (renderError) {
+        // Fallback: try rendering without Canvg using native SVG support
+        console.warn('Canvg rendering failed, trying fallback method:', renderError);
+        
+        const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        
+        try {
+          const img = new Image();
+          await new Promise((imgResolve, imgReject) => {
+            img.onload = () => imgResolve(undefined);
+            img.onerror = () => imgReject(new Error('Failed to load SVG as image'));
+            img.src = svgUrl;
+          });
+          
+          ctx.drawImage(img, 0, 0, finalWidth, finalHeight);
+          URL.revokeObjectURL(svgUrl);
+        } catch (fallbackError) {
+          URL.revokeObjectURL(svgUrl);
+          throw new Error('SVG rendering failed: ' + (fallbackError instanceof Error ? fallbackError.message : 'Unknown error'));
+        }
+      }
 
       onProgress?.(90);
 

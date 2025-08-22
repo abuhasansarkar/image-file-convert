@@ -16,6 +16,7 @@ import {
 import { useConversionStore, type ConversionFile } from '@/lib/store/conversion-store';
 import { ProgressBar } from './progress-bar';
 import { PdfPreview } from './pdf-preview';
+import { TextPreview } from './text-preview';
 import { cn } from '@/lib/utils/cn';
 import { formatFileSize, createDownloadLink, getOutputFilename } from '@/lib/utils/file-utils';
 
@@ -69,6 +70,13 @@ export function FileQueue({ outputFormat, className }: FileQueueProps) {
 
   const isPdfFile = (filename: string) => {
     return filename.toLowerCase().endsWith('.pdf') || outputFormat.toLowerCase() === 'pdf';
+  };
+
+  const isTextFile = (filename: string) => {
+    const textExtensions = ['.txt', '.json'];
+    return textExtensions.some(ext => filename.toLowerCase().endsWith(ext)) || 
+           outputFormat.toLowerCase() === 'txt' || 
+           outputFormat.toLowerCase() === 'json';
   };
 
   if (files.length === 0) {
@@ -195,6 +203,13 @@ export function FileQueue({ outputFormat, className }: FileQueueProps) {
               onClose={() => setPreviewFile(null)}
               onDownload={() => handleDownload(previewFile)}
             />
+          ) : isTextFile(getOutputFilename(previewFile.name, outputFormat)) ? (
+            <TextPreview
+              textUrl={previewFile.outputUrl!}
+              filename={getOutputFilename(previewFile.name, outputFormat)}
+              onClose={() => setPreviewFile(null)}
+              onDownload={() => handleDownload(previewFile)}
+            />
           ) : (
             <motion.div
               initial={{ opacity: 0 }}
@@ -214,12 +229,22 @@ export function FileQueue({ outputFormat, className }: FileQueueProps) {
                   <h3 className="text-lg font-semibold">
                     {getOutputFilename(previewFile.name, outputFormat)}
                   </h3>
-                  <button
-                    onClick={() => setPreviewFile(null)}
-                    className="btn-ghost p-2 h-auto"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handleDownload(previewFile)}
+                      className="btn-ghost p-2 h-auto"
+                      title="Download file"
+                    >
+                      <Download className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={() => setPreviewFile(null)}
+                      className="btn-ghost p-2 h-auto"
+                      title="Close preview"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="p-4">

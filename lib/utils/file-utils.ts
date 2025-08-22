@@ -34,7 +34,40 @@ export function getFileExtension(filename: string): string {
 
 export function isValidFileType(file: File, conversionType: ConversionType): boolean {
   const supportedTypes = SUPPORTED_FORMATS[conversionType];
-  return supportedTypes.some(type => type === file.type);
+  
+  // Check MIME type first
+  if (supportedTypes.some(type => type === file.type)) {
+    return true;
+  }
+  
+  // Fallback: check file extension for better compatibility
+  const extension = getFileExtension(file.name);
+  const extensionMap: Record<string, string[]> = {
+    'jpg': ['image/jpeg', 'image/jpg'],
+    'jpeg': ['image/jpeg', 'image/jpg'],
+    'png': ['image/png'],
+    'webp': ['image/webp'],
+    'gif': ['image/gif'],
+    'bmp': ['image/bmp'],
+    'tiff': ['image/tiff', 'image/tif'],
+    'tif': ['image/tiff', 'image/tif'],
+    'svg': ['image/svg+xml'],
+    'heic': ['image/heic', 'image/heif'],
+    'heif': ['image/heic', 'image/heif'],
+    'ico': ['image/x-icon', 'image/vnd.microsoft.icon'],
+    'pdf': ['application/pdf'],
+    'cr2': ['image/x-canon-cr2'],
+    'nef': ['image/x-nikon-nef'],
+    'arw': ['image/x-sony-arw'],
+    'dng': ['image/x-adobe-dng']
+  };
+  
+  const mimeTypesForExtension = extensionMap[extension];
+  if (mimeTypesForExtension) {
+    return supportedTypes.some(type => mimeTypesForExtension.includes(type));
+  }
+  
+  return false;
 }
 
 export function isValidFileSize(file: File): boolean {

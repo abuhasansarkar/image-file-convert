@@ -127,14 +127,14 @@ const ConversionCard = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2">
           {conversions.map((conversion) => {
             const Icon = conversion.icon;
             return (
               <Link
                 key={conversion.href}
                 href={conversion.href}
-                className="group card p-6 hover:shadow-soft-xl transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:rotate-1"
+                className="group card md:p-6 p-4 hover:shadow-soft-xl transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:rotate-1"
               >
                 <div className="space-y-4">
                   <div
