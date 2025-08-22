@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Shield, Zap } from 'lucide-react';
+import { Check, Heart, Shield, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 export function Footer() {
@@ -12,8 +12,10 @@ export function Footer() {
              <div className="space-y-4">
             <h3 className="text-lg font-semibold">Supported Formats</h3>
             <div className="text-sm text-muted-foreground">
-              <p className="mb-2">Input: JPG, PNG, PDF, HEIC, SVG, RAW, BMP</p>
-              <p>Output: WebP, PDF, JPG, PNG, TIFF</p>
+              <b className="font-bold">Input Files</b>
+              <p className="mb-2"> JPG, JPEG, PNG, PDF, HEIC, SVG, RAW, BMP, GIF, WEBP, ICO, TIFF, </p>
+                  <b className="font-bold mt-1">Output Files</b>
+              <p> WebP, PDF, JPG, PNG, TIFF, TXT, </p>
             </div>
           </div>
 
@@ -21,6 +23,10 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Features</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-center space-x-2">
+                <Check className="h-4 w-4 text-green-500" />
+                <span>Everyting is 100% free </span>
+              </li>
               <li className="flex items-center space-x-2">
                 <Shield className="h-4 w-4 text-green-500" />
                 <span>100% Client-side Processing</span>

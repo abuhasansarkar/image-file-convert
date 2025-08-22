@@ -17,6 +17,7 @@ import { useConversionStore, type ConversionFile } from '@/lib/store/conversion-
 import { ProgressBar } from './progress-bar';
 import { PdfPreview } from './pdf-preview';
 import { TextPreview } from './text-preview';
+import { ImagePreview } from './image-preview';
 import { cn } from '@/lib/utils/cn';
 import { formatFileSize, createDownloadLink, getOutputFilename } from '@/lib/utils/file-utils';
 
@@ -211,53 +212,12 @@ export function FileQueue({ outputFormat, className }: FileQueueProps) {
               onDownload={() => handleDownload(previewFile)}
             />
           ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-              onClick={() => setPreviewFile(null)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="card max-w-4xl max-h-[90vh] overflow-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="p-4 border-b flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    {getOutputFilename(previewFile.name, outputFormat)}
-                  </h3>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => handleDownload(previewFile)}
-                      className="btn-ghost p-2 h-auto"
-                      title="Download file"
-                    >
-                      <Download className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() => setPreviewFile(null)}
-                      className="btn-ghost p-2 h-auto"
-                      title="Close preview"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="p-4">
-                  {previewFile.outputUrl && (
-                    <img
-                      src={previewFile.outputUrl}
-                      alt="Preview"
-                      className="max-w-full h-auto rounded-md"
-                    />
-                  )}
-                </div>
-              </motion.div>
-            </motion.div>
+            <ImagePreview
+              file={previewFile}
+              originalFile={files.find(f => f.id === previewFile.id)?.file || new File([], 'unknown')}
+              onClose={() => setPreviewFile(null)}
+              onDownload={() => handleDownload(previewFile)}
+            />
           )
         )}
       </AnimatePresence>

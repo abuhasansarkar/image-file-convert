@@ -9,7 +9,8 @@ import { ThemeToggle } from './theme-toggle';
 import { cn } from '@/lib/utils/cn';
 
 const conversions = [
-  { name: 'AnyImage → WebP', href: '/' },
+  { name: 'Any Image → WebP', href: '/' },
+  { name: 'Any Image → AVIF', href: '/convert/image-avif' },
   { name: 'Images → PDF', href: '/convert/images-pdf' },
   { name: 'Images → Text', href: '/convert/image-text' },
   { name: 'PDF → JPG', href: '/convert/pdf-jpg' },
@@ -21,7 +22,6 @@ const conversions = [
 
 const mainPages = [
   { name: 'Blog', href: '/blog' },
-  { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -99,7 +99,7 @@ export function Header() {
             {/* Privacy Badge */}
             <div className="hidden sm:flex items-center space-x-1 px-2 py-1 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-medium">
               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span>Local Process Only</span>
+              <span>Local Only</span>
             </div>
 
             <ThemeToggle />
@@ -111,9 +111,9 @@ export function Header() {
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </button>
           </div>

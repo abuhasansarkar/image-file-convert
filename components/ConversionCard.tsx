@@ -22,6 +22,14 @@ const conversions = [
     color: "from-green-500 to-cyan-500",
   },
   {
+    name: "Any Image → AVIF",
+    href: "/convert/image-avif",
+    description:
+      "Convert any image to ultra-modern AVIF format for maximum compression",
+    icon: ImageIcon,
+    color: "from-purple-500 to-pink-500",
+  },
+  {
     name: "JPG → WebP",
     href: "/convert/jpg-webp",
     description:
@@ -112,6 +120,27 @@ const conversions = [
     description: "Convert icon files to PNG format",
     icon: Palette,
     color: "from-indigo-500 to-blue-500",
+  },
+  {
+    name: "AVIF → JPG",
+    href: "/convert/avif-jpg",
+    description: "Convert modern AVIF images to universal JPG format",
+    icon: ImageIcon,
+    color: "from-emerald-500 to-teal-500",
+  },
+  {
+    name: "AVIF → PNG",
+    href: "/convert/avif-png",
+    description: "Convert AVIF images to PNG with transparency support",
+    icon: Palette,
+    color: "from-teal-500 to-cyan-500",
+  },
+  {
+    name: "AVIF → JPEG",
+    href: "/convert/avif-jpeg",
+    description: "Convert AVIF images to JPEG with quality control",
+    icon: ImageIcon,
+    color: "from-cyan-500 to-sky-500",
   },
 ];
 

@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Free Image Converter - Convert JPG, PNG, WebP, PDF & More Online',
-  description: 'Convert images between 8+ formats instantly. 100% free, secure, and private. All processing happens in your browser - no uploads required. Support for JPG, PNG, WebP, PDF, HEIC, SVG, RAW, and BMP.',
+  description: 'Convert images between 10+ formats instantly. 100% free, secure, and private. All processing happens in your browser - no uploads required. Support for JPG, PNG, WebP, PDF, HEIC, SVG, RAW, and BMP.',
   keywords: 'image converter, convert images online, JPG to WebP, PNG to WebP, PDF converter, HEIC converter, free image tools, online image conversion, secure image converter',
   authors: [{ name: 'Image Converter Team' }],
   creator: 'Image Converter',
@@ -61,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={inter.className}>

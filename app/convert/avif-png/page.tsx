@@ -2,9 +2,9 @@
 
 import { ConversionPageTemplate } from '@/components/conversion-page-template';
 import { useConversionStore } from '@/lib/store/conversion-store';
-import { convertHeicToJpg } from '@/lib/converters/heic-jpg-converter';
+import { convertAvifToPng } from '@/lib/converters/avif-converter';
 
-export default function HeicToJpgPage() {
+export default function AvifToPngPage() {
   const { files, updateFileStatus, setFileOutput, options } = useConversionStore();
 
   const handleConvert = async () => {
@@ -14,10 +14,10 @@ export default function HeicToJpgPage() {
       try {
         updateFileStatus(file.id, 'processing', 0);
         
-        const result = await convertHeicToJpg(file.file, {
-          quality: options.quality || 80,
+        const result = await convertAvifToPng(file.file, {
           width: options.width,
           height: options.height,
+          stripMetadata: options.stripMetadata,
         }, (progress) => {
           updateFileStatus(file.id, 'processing', progress);
         });
@@ -33,10 +33,10 @@ export default function HeicToJpgPage() {
 
   return (
     <ConversionPageTemplate
-      title="HEIC to JPG Converter supported only Safari Browser"
-      description="Convert iPhone HEIC photos to universal JPG format for better compatibility across devices and platforms. "
-      conversionType="heic-jpg"
-      outputFormat="jpg"
+      title="AVIF to PNG Converter"
+      description="Convert modern AVIF images to PNG format with transparency support and lossless quality."
+      conversionType="avif-png"
+      outputFormat="png"
       onConvert={handleConvert}
     />
   );

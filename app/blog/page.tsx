@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Image Conversion Blog - Tips, Guides & Best Practices',
+  title: 'Free Image Conversion Blog - Tips, Guides & Best Practices',
   description: 'Learn everything about image conversion with our comprehensive guides. Discover why different formats matter, how to optimize images for web, and conversion best practices.',
   keywords: 'image conversion blog, image optimization guides, JPG to WebP, PNG conversion, image formats explained, web image optimization',
   openGraph: {
@@ -138,7 +138,6 @@ const blogPosts = [
 
 export default function BlogPage() {
   const featuredPosts = blogPosts.filter(post => post.featured);
-  const regularPosts = blogPosts.filter(post => !post.featured);
 
   return (
     <div className="max-w-6xl mx-auto space-y-16">
@@ -197,15 +196,23 @@ export default function BlogPage() {
       {/* All Articles */}
       <section className="space-y-8">
         <h2 className="text-3xl font-bold">All Articles</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {regularPosts.map((post) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogPosts.map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group card p-6 hover:shadow-soft-lg transition-all duration-300"
+              className="group card p-0 overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:scale-105"
             >
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <div className="aspect-video bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900/30 dark:to-purple-900/30 flex items-center justify-center relative">
+                <div className="text-4xl">📸</div>
+                {post.featured && (
+                  <div className="absolute top-2 right-2 bg-primary-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                    Featured
+                  </div>
+                )}
+              </div>
+              <div className="p-4 space-y-3">
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium">
                     {post.category}
                   </span>
@@ -214,15 +221,15 @@ export default function BlogPage() {
                     <span>{post.readTime}</span>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-semibold group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground line-clamp-2">
                   {post.description}
                 </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
+                <div className="flex items-center justify-between pt-2">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Calendar className="w-3 h-3" />
                     <span>{post.publishDate}</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />

@@ -14,6 +14,10 @@ export const SUPPORTED_FORMATS = {
   'raw-tiff': ['image/x-canon-cr2', 'image/x-canon-crw', 'image/x-nikon-nef', 'image/x-sony-arw', 'image/x-adobe-dng'],
   'bmp-png': ['image/bmp'],
   'image-text': ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/tiff'],
+  'avif-jpg': ['image/avif'],
+  'avif-png': ['image/avif'],
+  'avif-jpeg': ['image/avif'],
+  'image-avif': ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/bmp', 'image/gif', 'image/tiff', 'image/svg+xml'],
 } as const;
 
 export type ConversionType = keyof typeof SUPPORTED_FORMATS;
@@ -59,7 +63,8 @@ export function isValidFileType(file: File, conversionType: ConversionType): boo
     'cr2': ['image/x-canon-cr2'],
     'nef': ['image/x-nikon-nef'],
     'arw': ['image/x-sony-arw'],
-    'dng': ['image/x-adobe-dng']
+    'dng': ['image/x-adobe-dng'],
+    'avif': ['image/avif']
   };
   
   const mimeTypesForExtension = extensionMap[extension];
@@ -118,7 +123,8 @@ export function getOutputFilename(inputFilename: string, outputFormat: string): 
     'tiff': 'tiff',
     'tif': 'tiff',
     'txt': 'txt',
-    'json': 'json'
+    'json': 'json',
+    'avif': 'avif'
   };
   
   const extension = formatExtensionMap[outputFormat.toLowerCase()] || outputFormat.toLowerCase();
