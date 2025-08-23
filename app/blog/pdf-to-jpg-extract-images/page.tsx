@@ -133,7 +133,7 @@ export default function PdfToJpgGuide() {
 
           <div className="card p-6 space-y-4">
             <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-              <Image className="w-6 h-6 text-green-600" />
+              <Image className="w-6 h-6 text-green-600" aria-label="PDF to JPG conversion icon" />
             </div>
             <h3 className="text-lg font-semibold">Educators & Students</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">

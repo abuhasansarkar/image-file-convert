@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://your-domain.com/sitemap.xml
-Sitemap: https://your-domain.com/sitemap-images.xml
+Sitemap: https://convertersnap.com/sitemap.xml
+Sitemap: https://convertersnap.com/sitemap-images.xml
 
 # Allow all conversion tools
 Allow: /convert/

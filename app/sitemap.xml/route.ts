@@ -1,7 +1,6 @@
-import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://your-domain.com'
+export function GET() {
+  const baseUrl = 'https://convertersnap.com'
   
   // Static pages
   const staticPages = [
@@ -102,9 +101,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [
+  const sitemap = [
     ...staticPages,
     ...conversionPages,
     ...blogPages,
   ]
+
+  // Generate XML sitemap
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemap.map(item => `
+  <url>
+    <loc>${item.url}</loc>
+    <lastmod>${item.lastModified.toISOString()}</lastmod>
+    <changefreq>${item.changeFrequency}</changefreq>
+    <priority>${item.priority}</priority>
+  </url>`).join('')}
+</urlset>`
+
+  return new Response(xml, {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
+  })
 }

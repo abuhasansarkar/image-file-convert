@@ -12,6 +12,7 @@ import { WebAppStructuredData } from '@/components/structured-data';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://convertersnap.com'),
   title: 'Free Image Converter - Convert JPG, PNG, WebP, PDF & More Online',
   description: 'Convert images between 10+ formats instantly. 100% free, secure, and private. All processing happens in your browser - no uploads required. Support for JPG, PNG, WebP, PDF, HEIC, SVG, RAW, and BMP.',
   keywords: 'image converter, convert images online, JPG to WebP, PNG to WebP, PDF converter, HEIC converter, free image tools, online image conversion, secure image converter',

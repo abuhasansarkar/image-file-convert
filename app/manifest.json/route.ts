@@ -1,7 +1,7 @@
-import { MetadataRoute } from 'next'
+import { NextResponse } from 'next/server'
 
-export default function manifest(): MetadataRoute.Manifest {
-  return {
+export function GET() {
+  const manifest = {
     name: 'Image Converter - Free Online Image Conversion Tool',
     short_name: 'Image Converter',
     description: 'Convert images between all major formats instantly. Free, secure, and private image conversion tool.',
@@ -36,4 +36,10 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'portrait-primary',
     scope: '/',
   }
+
+  return NextResponse.json(manifest, {
+    headers: {
+      'Content-Type': 'application/manifest+json',
+    },
+  })
 }

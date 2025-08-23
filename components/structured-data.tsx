@@ -30,7 +30,7 @@ export function WebAppStructuredData() {
   const data = {
     name: 'Image Converter Tool',
     description: 'Free online image converter supporting all major formats including JPG, PNG, WebP, HEIC, AVIF, and more. Convert images instantly in your browser with privacy protection.',
-    url: 'https://your-domain.com',
+    url: 'https://convertersnap.com',
     applicationCategory: 'MultimediaApplication',
     operatingSystem: 'Web Browser',
     offers: {
@@ -46,7 +46,7 @@ export function WebAppStructuredData() {
       'Privacy-first processing',
       'No file size limits'
     ],
-    screenshot: 'https://your-domain.com/favicon.png',
+    screenshot: 'https://convertersnap.com/favicon.png',
     author: {
       '@type': 'Organization',
       name: 'Image Converter Tool'
@@ -74,7 +74,7 @@ export function BlogArticleStructuredData({
   const data = {
     headline: title,
     description: description,
-    url: `https://your-domain.com/blog/${slug}`,
+    url: `https://convertersnap.com/blog/${slug}`,
     datePublished: publishDate,
     dateModified: publishDate,
     author: {
@@ -86,14 +86,14 @@ export function BlogArticleStructuredData({
       name: 'Image Converter Tool',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://your-domain.com/favicon.png'
+        url: 'https://convertersnap.com/favicon.png'
       }
     },
     articleSection: category,
     wordCount: readTime,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://your-domain.com/blog/${slug}`
+      '@id': `https://convertersnap.com/blog/${slug}`
     }
   }
 

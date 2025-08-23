@@ -25,7 +25,7 @@ export function generateSEOMetadata({
   author = 'Image Converter Team',
   section
 }: SEOMetadataProps): Metadata {
-  const baseUrl = 'https://your-domain.com'
+  const baseUrl = 'https://convertersnap.com'
   const fullUrl = canonicalUrl ? `${baseUrl}${canonicalUrl}` : baseUrl
 
   return {
@@ -91,7 +91,7 @@ export const generateConversionPageMetadata = (
   toFormat: string,
   additionalKeywords?: string
 ): Metadata => {
-  const title = `${fromFormat.toUpperCase()} to ${toFormat.toUpperCase()} Converter - Free Online Tool`
+  const title = `${fromFormat.toUpperCase()} to ${toFormat.toUpperCase()} Converter - Free Online Tool | ConverterSnap`
   const description = `Convert ${fromFormat.toUpperCase()} to ${toFormat.toUpperCase()} format instantly. Free, secure, and fast conversion tool that works in your browser. No uploads required.`
   const keywords = `${fromFormat} to ${toFormat} converter, convert ${fromFormat} to ${toFormat} online, ${fromFormat} ${toFormat} conversion, image converter, free image tools${additionalKeywords ? `, ${additionalKeywords}` : ''}`
 
@@ -112,7 +112,7 @@ export const generateBlogPostMetadata = (
   keywords?: string
 ): Metadata => {
   return generateSEOMetadata({
-    title: `${title} | Image Converter Blog`,
+    title: `${title} | ConverterSnap Blog`,
     description,
     keywords: keywords || `${title.toLowerCase()}, image conversion, ${category.toLowerCase()}`,
     canonicalUrl: `/blog/${slug}`,

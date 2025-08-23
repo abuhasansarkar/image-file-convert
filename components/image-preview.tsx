@@ -96,9 +96,10 @@ export function ImagePreview({ file, originalFile, onClose, onDownload }: ImageP
               <div className="space-y-2">
                 <h4 className="text-sm font-medium text-muted-foreground">Original</h4>
                 <div className="relative bg-muted rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={originalUrl}
-                    alt="Original"
+                    alt="Image preview"
                     className="w-full h-auto max-h-96 object-contain"
                   />
                   <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
@@ -110,9 +111,10 @@ export function ImagePreview({ file, originalFile, onClose, onDownload }: ImageP
               <div className="space-y-2">
                 <h4 className="text-sm font-medium text-muted-foreground">Converted</h4>
                 <div className="relative bg-muted rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={file.outputUrl}
-                    alt="Converted"
+                    alt="Converted image preview"
                     className="w-full h-auto max-h-96 object-contain"
                   />
                   <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
@@ -125,9 +127,10 @@ export function ImagePreview({ file, originalFile, onClose, onDownload }: ImageP
             /* Single View */
             <div className="flex justify-center">
               <div className="relative bg-muted rounded-lg overflow-hidden max-w-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={file.status === 'completed' && file.outputUrl ? file.outputUrl : originalUrl}
-                  alt={file.status === 'completed' ? 'Converted' : 'Original'}
+                  alt={file.status === 'completed' ? 'Converted image preview' : 'Original image preview'}
                   className="w-full h-auto max-h-[60vh] object-contain"
                 />
                 <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">

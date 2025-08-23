@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const baseUrl = 'https://your-domain.com'
+  const baseUrl = 'https://convertersnap.com'
   
   const imageUrls = [
     // App icons and favicons
