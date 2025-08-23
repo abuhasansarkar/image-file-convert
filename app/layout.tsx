@@ -7,6 +7,7 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/toaster';
 import { NavigationLoader } from '@/components/navigation-loader';
+import { WebAppStructuredData } from '@/components/structured-data';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={inter.className}>
+        <WebAppStructuredData />
         <ThemeProvider>
           <QueryClientProvider>
             <NavigationLoader />

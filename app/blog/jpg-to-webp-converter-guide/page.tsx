@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { BlogCardsFooter } from '@/components/blog-cards-footer';
 import { ArrowRight, CheckCircle, Zap, Shield, Download, TrendingUp } from 'lucide-react';
+import { BlogArticleStructuredData, HowToStructuredData } from '@/components/structured-data';
 
 export const metadata: Metadata = {
   title: 'JPG to WebP Converter: Reduce Image Sizes by 80% in 2025',
@@ -15,8 +16,28 @@ export const metadata: Metadata = {
 };
 
 export default function JpgToWebpGuide() {
+  const howToSteps = [
+    "Visit our free online JPG to WebP converter",
+    "Upload your JPG images by dragging and dropping or clicking to browse",
+    "Customize quality settings (optional) - we recommend 85% for best balance",
+    "Click Convert and download your optimized WebP files"
+  ];
+
   return (
     <div className="max-w-4xl mx-auto space-y-12">
+      <BlogArticleStructuredData
+        title="JPG to WebP Converter: Reduce Image Sizes by 80% in 2025"
+        description="Convert JPG to WebP format and reduce image file sizes by up to 80% without quality loss. Free online converter with step-by-step guide for website optimization."
+        slug="jpg-to-webp-converter-guide"
+        publishDate="2024-12-20"
+        category="Web Optimization"
+        readTime="5 min read"
+      />
+      <HowToStructuredData
+        name="How to Convert JPG to WebP"
+        description="Step-by-step guide to convert JPG images to WebP format for better website performance"
+        steps={howToSteps}
+      />
       {/* Hero Section */}
       <section className="text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
