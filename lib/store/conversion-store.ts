@@ -52,6 +52,7 @@ interface ConversionStore {
   updateFileStatus: (id: string, status: ConversionFile['status'], progress?: number, error?: string) => void;
   setFileOutput: (id: string, blob: Blob, url: string) => void;
   updateOptions: (options: Partial<ConversionOptions>) => void;
+  setOptions: (options: Partial<ConversionOptions>) => void;
   setProcessing: (processing: boolean) => void;
   resetFile: (id: string) => void;
 }
@@ -129,6 +130,11 @@ export const useConversionStore = create<ConversionStore>()((set, _get) => ({
       })),
 
     updateOptions: (options) =>
+      set((state) => ({
+        options: { ...state.options, ...options },
+      })),
+
+    setOptions: (options) =>
       set((state) => ({
         options: { ...state.options, ...options },
       })),

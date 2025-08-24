@@ -203,24 +203,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="text-center space-y-6 py-12 bg-gradient-to-r from-primary/5 via-purple-500/5 to-pink-500/5 rounded-2xl">
-        <div className="space-y-4">
-          <h2 className="text-5xl font-bold">Ready to Convert?</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Choose any conversion type above to get started. No registration required, 
-            no file size limits, and your privacy is guaranteed.
-          </p>
-        </div>
-        
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link href="/convert" className="btn-primary">
-            Start Converting
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Link>
-        </div>
-      </section>
-
+ 
       <Toaster />
     </div>
   );

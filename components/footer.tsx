@@ -1,11 +1,31 @@
 'use client';
 
-import { Check, Heart, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Check, Heart, Shield, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background">
+   <>
+          {/* CTA Section */}
+            <section className="text-center space-y-6 py-12 bg-gradient-to-r from-primary/5 via-purple-500/5 to-pink-500/5 rounded-2xl">
+              <div className="space-y-4">
+                <h2 className="text-5xl font-bold">Ready to Convert?</h2>
+                <p className="text-muted-foreground max-w-xl mx-auto">
+                  Choose any conversion type above to get started. No registration required, 
+                  no file size limits, and your privacy is guaranteed.
+                </p>
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/convert" className="btn-primary">
+                  Start Converting
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </div>
+            </section>
+      
+       <footer className="border-t bg-background">
+
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
              {/* Supported Formats */}
@@ -13,9 +33,9 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Supported Formats</h3>
             <div className="text-sm text-muted-foreground">
               <b className="font-bold">Input Files</b>
-              <p className="mb-2"> JPG, JPEG, PNG, PDF, HEIC, SVG, RAW, BMP, GIF, WEBP, ICO, TIFF, </p>
+              <p className="mb-2"> JPG, JPEG, PNG, PDF, HEIC, SVG, RAW, BMP, GIF, WEBP, AVIF, ICO, TIFF, </p>
                   <b className="font-bold mt-1">Output Files</b>
-              <p> WebP, PDF, JPG, PNG, TIFF, TXT, </p>
+              <p> WebP, AVIF, PDF, JPG, PNG, TIFF, TXT, </p>
             </div>
           </div>
 
@@ -91,6 +111,7 @@ export function Footer() {
           </p>
         </div>
       </div>
-    </footer>
+       </footer>
+   </>
   );
 }

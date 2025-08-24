@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: process.env.GMAIL_USER || 'abuhasansarkar2@gmail.com',
       to: 'abuhasansarkar2@gmail.com',
-      subject: `Contact Form: ${subject || 'New Message'}`,
+      subject: `Contact form ConvertSnap: ${subject || 'New Message'}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333; border-bottom: 2px solid #4f46e5; padding-bottom: 10px;">
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
           <hr style="margin: 30px 0; border: none; border-top: 1px solid #e2e8f0;">
           
           <p style="color: #6b7280; font-size: 12px; text-align: center;">
-            This message was sent from the Image Converter contact form.<br>
+            This message was sent from the ConvertSnap contact form.<br>
             Timestamp: ${new Date().toLocaleString()}
           </p>
         </div>

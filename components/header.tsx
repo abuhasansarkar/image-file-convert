@@ -9,15 +9,15 @@ import { ThemeToggle } from './theme-toggle';
 import { cn } from '@/lib/utils/cn';
 
 const conversions = [
-  { name: 'Any Image → WebP', href: '/' },
-  { name: 'Any Image → AVIF', href: '/convert/image-avif' },
-  { name: 'Images → PDF', href: '/convert/images-pdf' },
-  { name: 'Images → Text', href: '/convert/image-text' },
-  { name: 'PDF → JPG', href: '/convert/pdf-jpg' },
-  { name: 'HEIC → JPG', href: '/convert/heic-jpg' },
-  { name: 'SVG → PNG', href: '/convert/svg-png' },
-  { name: 'RAW → TIFF', href: '/convert/raw-tiff' },
-  { name: 'BMP → PNG', href: '/convert/bmp-png' },
+  { name: 'Image → WebP', href: '/' },
+  { name: 'Image → AVIF', href: '/convert/image-to-avif' },
+  { name: 'Image → PDF', href: '/convert/image-to-pdf' },
+  { name: 'Image → Text', href: '/convert/image-to-text' },
+  { name: 'PDF → JPG', href: '/convert/pdf-to-jpg' },
+  { name: 'HEIC → JPG', href: '/convert/heic-to-jpg' },
+  { name: 'SVG → PNG', href: '/convert/svg-to-png' },
+  { name: 'RAW → TIFF', href: '/convert/raw-to-tiff' },
+  { name: 'BMP → PNG', href: '/convert/bmp-to-png' },
 ];
 
 const mainPages = [
@@ -49,8 +49,8 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <ImageIcon className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">Converter</span>
+            <ImageIcon className="h-8 w-8 text-primary text-green-500" />
+            <span className="text-xl font-bold">ConverterSnap</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,8 +60,8 @@ export function Header() {
                 key={conversion.href}
                 href={conversion.href}
                 className={cn(
-                  'px-3 py-2 text-sm font-semibold rounded-md transition-colors hover:bg-accent hover:text-accent-foreground',
-                  pathname === conversion.href && 'bg-accent text-accent-foreground'
+                  'px-3 py-2 text-sm font-semibold rounded-md transition-colors hover:bg-accent hover:text-accent-foreground leading-4',
+                  pathname === conversion.href && 'bg-accent text-accent-foreground border-b-2 border-green-500'
                 )}
               >
                 {conversion.name}
@@ -74,7 +74,7 @@ export function Header() {
                 href={page.href}
                 className={cn(
                   'px-3 py-2 text-sm font-semibold rounded-md transition-colors hover:bg-accent hover:text-accent-foreground',
-                  pathname === page.href && 'bg-accent text-accent-foreground'
+                  pathname === page.href && 'bg-accent text-accent-foreground border-b-2 border-green-500'
                 )}
               >
                 {page.name}
@@ -138,7 +138,7 @@ export function Header() {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
                         'px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent hover:text-accent-foreground text-center',
-                        pathname === conversion.href && 'bg-accent text-accent-foreground'
+                        pathname === conversion.href && 'bg-accent text-accent-foreground border-b-2 border-green-500'
                       )}
                     >
                       {conversion.name}
@@ -154,7 +154,7 @@ export function Header() {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={cn(
                           'px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent hover:text-accent-foreground text-center',
-                          pathname === page.href && 'bg-accent text-accent-foreground'
+                          pathname === page.href && 'bg-accent text-accent-foreground border-b-2 border-green-500'
                         )}
                       >
                         {page.name}

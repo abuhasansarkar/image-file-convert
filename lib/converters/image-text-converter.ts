@@ -71,7 +71,10 @@ export async function convertImageToText(
 
     // Initialize Tesseract worker with better error handling
     try {
-      worker = await Tesseract.createWorker(options.language || 'eng', 1, {
+      // Handle auto-detection properly
+      const language = options.language === 'auto' || options.language === 'osd' ? 'eng+osd' : options.language || 'eng';
+      
+      worker = await Tesseract.createWorker(language, 1, {
         logger: (m: TesseractLogMessage) => {
           if (m.status === 'recognizing text') {
             const progress = Math.round(15 + (m.progress * 70));
@@ -231,8 +234,13 @@ export async function convertImageToText(
   }
 }
 
-// Supported languages for OCR
+// Comprehensive language support for OCR (100+ languages)
 export const SUPPORTED_OCR_LANGUAGES = {
+  // Auto-detection options
+  'auto': '🤖 Auto-Detect Language',
+  'osd': '🔍 Smart Detection (OSD)',
+  
+  // Major World Languages
   'eng': 'English',
   'spa': 'Spanish',
   'fra': 'French',
@@ -245,7 +253,136 @@ export const SUPPORTED_OCR_LANGUAGES = {
   'jpn': 'Japanese',
   'kor': 'Korean',
   'ara': 'Arabic',
-  'hin': 'Hindi'
+  'hin': 'Hindi',
+  
+  // European Languages
+  'nld': 'Dutch',
+  'swe': 'Swedish',
+  'nor': 'Norwegian',
+  'dan': 'Danish',
+  'fin': 'Finnish',
+  'pol': 'Polish',
+  'ces': 'Czech',
+  'hun': 'Hungarian',
+  'ron': 'Romanian',
+  'bul': 'Bulgarian',
+  'hrv': 'Croatian',
+  'srp': 'Serbian',
+  'slk': 'Slovak',
+  'slv': 'Slovenian',
+  'est': 'Estonian',
+  'lav': 'Latvian',
+  'lit': 'Lithuanian',
+  'ell': 'Greek',
+  'tur': 'Turkish',
+  'ukr': 'Ukrainian',
+  'bel': 'Belarusian',
+  'mkd': 'Macedonian',
+  'alb': 'Albanian',
+  'bos': 'Bosnian',
+  'mlt': 'Maltese',
+  'isl': 'Icelandic',
+  'gle': 'Irish',
+  'gla': 'Scottish Gaelic',
+  'cym': 'Welsh',
+  'eus': 'Basque',
+  'cat': 'Catalan',
+  'glg': 'Galician',
+  
+  // Asian Languages
+  'tha': 'Thai',
+  'vie': 'Vietnamese',
+  'ind': 'Indonesian',
+  'msa': 'Malay',
+  'fil': 'Filipino',
+  'ben': 'Bengali',
+  'guj': 'Gujarati',
+  'kan': 'Kannada',
+  'mal': 'Malayalam',
+  'mar': 'Marathi',
+  'nep': 'Nepali',
+  'ori': 'Odia',
+  'pan': 'Punjabi',
+  'sin': 'Sinhala',
+  'tam': 'Tamil',
+  'tel': 'Telugu',
+  'urd': 'Urdu',
+  'asm': 'Assamese',
+  'bod': 'Tibetan',
+  'mya': 'Myanmar (Burmese)',
+  'khm': 'Khmer',
+  'lao': 'Lao',
+  'mon': 'Mongolian',
+  'uzb': 'Uzbek',
+  'kaz': 'Kazakh',
+  'kir': 'Kyrgyz',
+  'tgk': 'Tajik',
+  'aze': 'Azerbaijani',
+  'kat': 'Georgian',
+  'hye': 'Armenian',
+  'heb': 'Hebrew',
+  'fas': 'Persian (Farsi)',
+  'pus': 'Pashto',
+  'snd': 'Sindhi',
+  
+  // African Languages
+  'afr': 'Afrikaans',
+  'amh': 'Amharic',
+  'hau': 'Hausa',
+  'ibo': 'Igbo',
+  'kin': 'Kinyarwanda',
+  'mlg': 'Malagasy',
+  'orm': 'Oromo',
+  'som': 'Somali',
+  'swa': 'Swahili',
+  'tir': 'Tigrinya',
+  'xho': 'Xhosa',
+  'yor': 'Yoruba',
+  'zul': 'Zulu',
+  
+  // Middle Eastern Languages
+  'kur': 'Kurdish',
+  'ckb': 'Kurdish (Sorani)',
+  
+  // Latin Script Languages
+  'lat': 'Latin',
+  'epo': 'Esperanto',
+  'ina': 'Interlingua',
+  
+  // Multi-language options
+  'script/Arabic': 'Arabic Script',
+  'script/Armenian': 'Armenian Script',
+  'script/Bengali': 'Bengali Script',
+  'script/Canadian_Aboriginal': 'Canadian Aboriginal Script',
+  'script/Cherokee': 'Cherokee Script',
+  'script/Cyrillic': 'Cyrillic Script',
+  'script/Devanagari': 'Devanagari Script',
+  'script/Ethiopic': 'Ethiopic Script',
+  'script/Fraktur': 'Fraktur Script',
+  'script/Georgian': 'Georgian Script',
+  'script/Greek': 'Greek Script',
+  'script/Gujarati': 'Gujarati Script',
+  'script/Gurmukhi': 'Gurmukhi Script',
+  'script/HanS': 'Han (Simplified) Script',
+  'script/HanT': 'Han (Traditional) Script',
+  'script/Hangul': 'Hangul Script',
+  'script/Hebrew': 'Hebrew Script',
+  'script/Hiragana': 'Hiragana Script',
+  'script/Kannada': 'Kannada Script',
+  'script/Katakana': 'Katakana Script',
+  'script/Khmer': 'Khmer Script',
+  'script/Lao': 'Lao Script',
+  'script/Latin': 'Latin Script',
+  'script/Malayalam': 'Malayalam Script',
+  'script/Myanmar': 'Myanmar Script',
+  'script/Oriya': 'Oriya Script',
+  'script/Sinhala': 'Sinhala Script',
+  'script/Tamil': 'Tamil Script',
+  'script/Telugu': 'Telugu Script',
+  'script/Thaana': 'Thaana Script',
+  'script/Thai': 'Thai Script',
+  'script/Tibetan': 'Tibetan Script',
+  'script/Vietnamese': 'Vietnamese Script'
 } as const;
 
 export type SupportedLanguage = keyof typeof SUPPORTED_OCR_LANGUAGES;
